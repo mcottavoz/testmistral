@@ -1,0 +1,13 @@
+{
+  "name": "testmistral",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "dependencies": {
+    "@mistralai/mistralai": "^1.5.2",
+    "express": "^4.21.2"
+  }
+}

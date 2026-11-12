@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mistral Chat</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🜲</text></svg>" />
+</head>
+<body data-theme="dark">
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <span class="logo-mark">M</span>
+          <span>Mistral Chat</span>
+        </div>
+        <button class="icon-btn" id="closeSidebar" title="Fermer" aria-label="Fermer le menu">✕</button>
+      </div>
+
+      <button class="new-chat-btn" id="newChatBtn">
+        <span class="plus">＋</span> Nouvelle conversation
+      </button>
+
+      <nav class="conversations" id="conversationList" aria-label="Conversations"></nav>
+
+      <div class="sidebar-footer">
+        <div class="theme-toggle">
+          <span>🌙</span>
+          <label class="switch">
+            <input type="checkbox" id="themeToggle" />
+            <span class="slider"></span>
+          </label>
+          <span>☀️</span>
+        </div>
+        <div class="powered">Propulsé par <strong>mistral-small-latest</strong></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn menu-btn" id="openSidebar" title="Menu" aria-label="Ouvrir le menu">☰</button>
+        <div class="topbar-title" id="topbarTitle">Nouvelle conversation</div>
+        <div class="topbar-actions">
+          <button class="icon-btn" id="settingsBtn" title="Réglages" aria-label="Réglages">⚙️</button>
+          <button class="icon-btn" id="clearBtn" title="Effacer la conversation" aria-label="Effacer">🗑️</button>
+        </div>
+      </header>
+
+      <div class="chat-container" id="chat">
+        <div class="welcome" id="welcome">
+          <div class="welcome-icon">🜲</div>
+          <h1>Bienvenue sur Mistral Chat</h1>
+          <p>Posez une question, l'IA répond en streaming.</p>
+          <div class="suggestions">
+            <button class="suggestion" data-prompt="Explique-moi ce qu'est une API REST comme si j'avais 12 ans.">Explique les API REST</button>
+            <button class="suggestion" data-prompt="Écris une fonction JavaScript qui détecte si un mot est un palindrome, avec des commentaires.">Code : palindrome</button>
+            <button class="suggestion" data-prompt="Donne-moi 3 idées originales de projets web pour un développeur junior.">Idées de projets</button>
+            <button class="suggestion" data-prompt="Résume les avantages et limites du renewable energy en 5 points.">Résumé structuré</button>
+          </div>
+        </div>
+      </div>
+
+      <footer class="composer-wrap">
+        <form class="composer" id="form">
+          <textarea id="input" rows="1" placeholder="Écrivez votre message… (Entrée pour envoyer, Maj+Entrée pour un retour à la ligne)"></textarea>
+          <button class="stop-btn" id="stopBtn" type="button" title="Arrêter">■</button>
+          <button class="send-btn" id="sendBtn" type="submit" title="Envoyer">➤</button>
+        </form>
+        <div class="disclaimer">Mistral peut faire des erreurs. Vérifiez les informations importantes.</div>
+      </footer>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="settingsOverlay" hidden>
+    <div class="modal" role="dialog" aria-label="Réglages">
+      <div class="modal-header">
+        <h2>Réglages</h2>
+        <button class="icon-btn" id="closeSettings" title="Fermer" aria-label="Fermer">✕</button>
+      </div>
+      <div class="modal-body">
+        <label class="field">
+          <span>Modèle</span>
+          <select id="modelSelect"></select>
+        </label>
+        <label class="field">
+          <span>Prompt système</span>
+          <textarea id="systemPrompt" rows="3" placeholder="Ex : Tu es un assistant qui répond en français, de façon concise."></textarea>
+        </label>
+        <div class="field">
+          <span>Température&nbsp;: <output id="tempValue">0.7</output></span>
+          <input type="range" id="temperature" min="0" max="2" step="0.1" value="0.7" />
+          <small>Bas = réponses précises, haut = réponses créatives.</small>
+        </div>
+        <label class="field">
+          <span>Tokens max (0 = illimité)</span>
+          <input type="number" id="maxTokens" min="0" max="8192" step="1" value="0" />
+        </label>
+      </div>
+      <div class="modal-footer">
+        <button class="btn secondary" id="resetSettings">Réinitialiser</button>
+        <button class="btn primary" id="saveSettings">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <template id="welcomeTemplate">
+    <div class="welcome-icon">🜲</div>
+    <h1>Bienvenue sur Mistral Chat</h1>
+    <p>Posez une question, l'IA répond en streaming.</p>
+    <div class="suggestions">
+      <button class="suggestion" data-prompt="Explique-moi ce qu'est une API REST comme si j'avais 12 ans.">Explique les API REST</button>
+      <button class="suggestion" data-prompt="Écris une fonction JavaScript qui détecte si un mot est un palindrome, avec des commentaires.">Code : palindrome</button>
+      <button class="suggestion" data-prompt="Donne-moi 3 idées originales de projets web pour un développeur junior.">Idées de projets</button>
+      <button class="suggestion" data-prompt="Résume les avantages et limites des énergies renouvelables en 5 points.">Résumé structuré</button>
+    </div>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
